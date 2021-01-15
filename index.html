@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.14.0-web/css/all.css">
+</head>
+<body>
+    <!-- Container -->
+    <div class="wrapper">
+        <div class="row wrap-row">
+            <!-- Search Section -->
+            <div class="col-md-6 find-user">
+                <div class="welcome-wrap">
+                    <h1 class="welcome">Hello,</h1><h1 class="weight welcome">Emerald</h1>
+                </div>
+                <p>Welcome to your dashboard, kindly sort through the user base</p>
+                <div class="input-field">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Find a user">
+                </div>
+                <div class="user-links">
+                    <h4>Show Users</h4>
+                    <div class="ul">
+                        <div><span class="q"><i class="fas fa-users"></i></span><small>All Users</small></div>
+                        <div><span class="w"><i class="fas fa-male"></i></span><small>Male</small></div>
+                        <div><span class="e"><i class="fas fa-female"></i></span><small>Female</small></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--Result Section  -->
+            <div class="col-md-6 user-result">
+                <div class="result-txt">
+                    <h3>All Users</h3>
+                    <small>Filter by</small>
+                </div>
+                <div class="filter-field">
+                    <i class="fas fa-search move"></i>
+                    <input type="text" placeholder="Find in list">
+                    <select name="country" id="country"></select>
+                    <div class="filter-wrap">
+                        <div class="toggle-btn">
+                            <div class="inner-circle" ></div>
+                        </div>
+                        <span>Show Country</span>
+                    </div>
+                    
+                </div>
+                <div class="result-wrap">
+                    <div class="results">
+                        <div class="fist">
+                            <img src="images/image-victor.jpg" alt="">
+                            <div class="fist-txt">
+                                <h3 class="name"></h3>
+                                <p class="address">9278 new road, kilcoole, waterford</p>
+                                <p class="contact">
+                                    <i class="far fa-envelope lane"></i>
+                                    <span class="mail"></span> 
+                                    <span class="phone"><i class="fas fa-phone-alt mail"></i></span>
+                                    <a href="" class="arrow"><i class="fas fa-arrow-right"></i></a>
+                                   
+                                </p>
+                            </div>
+                        </div>
+    
+                        <div class="fist">
+                            <img src="images/image-victor.jpg" alt="">
+                            <div class="fist-txt">
+                                <h3 class="name"></h3>
+                                <p class="address">9278 new road, kilcoole, waterford</p>
+                                <p class="contact">
+                                    <i class="far fa-envelope lane"></i>
+                                    <span class="mail"></span> 
+                                    <span class="phone"><i class="fas fa-phone-alt mail"></i></span>
+                                    <a href="" class="arrow"><i class="fas fa-arrow-right"></i></a>
+                                   
+                                </p>
+                            </div>
+                        </div>
+    
+                        <div class="fist end">
+                            <img src="images/image-victor.jpg" alt="">
+                            <div class="fist-txt">
+                                <h3 class="name"></h3>
+                                <p class="address">9278 new road, kilcoole, waterford</p>
+                                <p class="contact">
+                                    <i class="far fa-envelope lane"></i>
+                                    <span class="mail"></span> 
+                                    <span class="phone"><i class="fas fa-phone-alt mail"></i></span>
+                                    <a href="" class="arrow"><i class="fas fa-arrow-right"></i></a>
+                                   
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let toggleBtn = document.querySelector('.toggle-btn');
+        let countrySearch = document.getElementById('country');
+        let searchIcon = document.querySelector('.move');
+        let toggleStatus = 1;
+
+        toggleBtn.addEventListener('click', myfunc);
+
+        function myfunc() {
+            if(toggleStatus == 1) {
+                toggleBtn.classList.add('active');
+                countrySearch.style.display = 'inline-block';
+                toggleBtn.classList.add('active');
+                // searchIcon.style.top = '13px';
+                // searchIcon.style.left = '35px';
+                toggleStatus = 0;                
+            } else if(toggleStatus == 0) {
+                toggleBtn.classList.remove('active');
+                countrySearch.style.display = 'none';
+                // searchIcon.style.top = '13px';
+                // searchIcon.style.left = '71px';
+                toggleStatus = 1;
+            }
+        };
+        
+        window.onload = function () {
+			let select = document.querySelector('select');
+
+			let Countries = ['Nigeria', 'Ghana', 'UK', 'Canada', 'Carlifonia'];
+
+			let options = Countries.map(fruit => `<option>${fruit}</option>`);
+
+			countrySearch.innerHTML = options;
+
+        };
+        
+        // Insert data from API
+        let data = [];
+
+        getRandomUser();
+        getRandomUser();
+        getRandomUser(); 
+
+        // Fetch random user and add money
+        async function getRandomUser() {
+            const res = await fetch('https://randomuser.me/api');
+            const data = await res.json();
+            console.log(data);
+            const user = data.results[0];
+            const newUser = {
+                name: `${user.name.first} ${user.name.last}`,
+                email: `${user.email}`,
+                cell: `${user.cell}`,
+                picture: `${user.picture.medium}`,
+                address: `${user.location.street.number} ${user.location.street.name}, ${user.location.state}`
+
+            };
+
+            addData(newUser);
+        }
+
+        // Add new obj to data arr
+        function addData(obj) {
+            data.push(obj);
+
+            updateDOM();
+        }
+
+        let results = document.querySelector('.results');
+        const string = ` <div class="footer"><button><i class="fas fa-cloud-download-alt"></i>Download results
+                    </button><div class="nxt-page"><span class="left"><i class="fas fa-less-than"></i></span>
+                        <span class="right"><i class="fas fa-greater-than"></i></span></div></div>`;
+        // Update DOM
+        function updateDOM(providedData = data) {
+            // Clear main div
+           
+            console.log(providedData);
+            let output = "";
+            let resultWrap = document.querySelector('.result-wrap');
+           
+           
+            providedData.forEach(item => {
+                output += `<div class="fist">
+                        <img src="${item.picture}" alt="">
+                        <div class="fist-txt">
+                            <h3 class="name">${item.name}</h3>
+                            <p class="address">${item.address}</p>
+                            <p class="contact">
+                                <i class="far fa-envelope lane"></i>
+                                <span class="mail">${item.email}</span> 
+                                <span class="phone"><i class="fas fa-phone-alt lane"></i>${item.cell}</span>
+                                <a href="" class="arrow"><i class="fas fa-arrow-right"></i></a>
+                               
+                            </p>
+                        </div>
+                    </div>`
+               results.innerHTML = output;
+               
+            });
+
+        }
+
+        function insertAfter(element, string) {
+                element.insertAdjacentHTML('afterend', string);
+                const footer = document.querySelector('.footer');
+
+                // const string = `<div class="footer"><button><i class="fas fa-cloud-download-alt"></i>Download results
+                //             </button><div class="nxt-page"><span class="left"><i class="fas fa-less-than"></i></span>
+                //             <span class="right"><i class="fas fa-greater-than"></i></span></div></div>`;
+
+            };
+
+            insertAfter(results, string);
+        
+    </script>
+</body>
+</html>
