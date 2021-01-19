@@ -95,13 +95,19 @@
     justify-content: space-between;
     width: 90%;
 }
-.ul div{
+.ul a{
     text-align: center;
     transition: transform .5s;
+    color: #fff;
 } 
 
-.ul div:hover{
+.ul a:hover, .ul a:active{
     transform: scale(1.2) ;
+    text-decoration: none;
+    color: #fff;
+}
+.active{
+    transform: scale(1.2);
 }
 .user-links span{
     width: 90px;
@@ -211,7 +217,7 @@
 .results{
     width: 100%;
     height: auto;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .fist{
     width: 100%;
@@ -230,6 +236,7 @@
 }
 .fist-txt{
     margin-left: 20px;
+    width: 100%;
 }
 .name{
     font-family: adobe clean-bold;
@@ -241,10 +248,13 @@
 }
 .address{
     font-style: italic;
-    margin-bottom: 0;
+    margin-bottom: 4px;
 }
 .contact{
     margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 .lane{
     margin-right: 7px;
@@ -256,7 +266,7 @@
     align-items: center; */
 }
 .arrow{
-    margin-left: 40px;
+    /* margin-left: 40px; */
     width: 35px;
     height: 35px;
     background-color: #30bbb5;
@@ -276,7 +286,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
-    bottom: 10px;
+    bottom: 20px;
     align-items: center;
     /* margin-top: 5px; */
 }

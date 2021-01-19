@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User list</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/user_list.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.14.0-web/css/all.css">
+</head>
+<body>
+    <!-- Container -->
+    <div class="wrapper">
+        <div class="row wrap-row">
+            <!-- Search Section -->
+            <div class="col-md-6 find-user">
+                <div class="welcome-wrap">
+                    <h1 class="welcome">Hello,</h1><h1 class="weight welcome">Emerald</h1>
+                </div>
+                <p>Welcome to your dashboard, kindly sort through the user base</p>
+                <div class="input-field">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Find a user">
+                </div>
+                <div class="user-links">
+                    <h4>Show Users</h4>
+                    <div class="ul">
+                        <div><span class="q"><i class="fas fa-users"></i></span><small>All Users</small></div>
+                        <div><span class="w"><i class="fas fa-male"></i></span><small>Male</small></div>
+                        <div><span class="e"><i class="fas fa-female"></i></span><small>Female</small></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--Result Section  -->
+            <div class="col-md-6 user-result">
+                <div class="result-txt">
+                    <h3>User List</h3>
+                    <small>Filter by</small>
+                </div>
+                <div class="filter-field">
+                    <i class="fas fa-search move"></i>
+                    <input type="text" placeholder="Find in list">
+                    <select name="country" id="country"></select>
+                    <div class="filter-wrap">
+                        <div class="toggle-btn">
+                            <div class="inner-circle" ></div>
+                        </div>
+                        <span>Show Country</span>
+                    </div>
+                    
+                </div>
+                <div class="result-wrap">
+                    <div class="results">
+                        <a class="results-link" href="index.html"><i class="fas fa-arrow-left"></i><span style="font-weight:600;">RESULTS</span></a>
+                        <div class="user-fist">
+                            <img src="images/image-victor.jpg" alt="">
+                            <div class="user-fist-txt">
+                                <h3 class="user-name">Mrs. Shalom Chioma</h3>
+                                <p class="user-address">9278 new road, kilcoole, waterford</p>
+                                <p class="user-contact">
+                                    <span class="user-mail"><i class="far fa-envelope lane"></i>brad.gibson@example.com</span> 
+                                    <span class="user-date">JOINED: 2002-05-21</span>
+                                    <span class="user-phone"><i class="fas fa-phone-alt mail"></i>011-962-7516</span>                                   
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="user-footer">
+                        <button type="button"class="disabled" disabled>
+                            <i class="fas fa-cloud-download-alt"></i>Download results
+                        </button>
+                        <div class="user-nxt-page">
+                            <span class="user-left disabled"><i class="fas fa-less-than"></i></span>
+                            <span class="user-right disabled"><i class="fas fa-greater-than"></i></span>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let toggleBtn = document.querySelector('.toggle-btn');
+        let countrySearch = document.getElementById('country');
+        let searchIcon = document.querySelector('.move');
+        let toggleStatus = 1;
+
+        toggleBtn.addEventListener('click', myfunc);
+
+        function myfunc() {
+            if(toggleStatus == 1) {
+                toggleBtn.classList.add('active');
+                countrySearch.style.display = 'inline-block';
+                toggleBtn.classList.add('active');
+                // searchIcon.style.top = '13px';
+                // searchIcon.style.left = '35px';
+                toggleStatus = 0;                
+            } else if(toggleStatus == 0) {
+                toggleBtn.classList.remove('active');
+                countrySearch.style.display = 'none';
+                // searchIcon.style.top = '13px';
+                // searchIcon.style.left = '71px';
+                toggleStatus = 1;
+            }
+        };
+        
+        window.onload = function () {
+			let select = document.querySelector('select');
+
+			let Countries = ['Nigeria', 'Ghana', 'UK', 'Canada', 'Carlifonia'];
+
+			let options = Countries.map(fruit => `<option>${fruit}</option>`);
+
+            countrySearch.innerHTML = options;
+            
+
+            let name = localStorage.getItem('NAME');
+            let address = localStorage.getItem('ADDRESS');
+            let email =  localStorage.getItem('EMAIL');
+            let phoneNo = localStorage.getItem('CELL');
+
+            console.log(name, address, email, phoneNo);
+
+            document.querySelector('.user-name').innerHTML= name;
+            document.querySelector('.user-address').innerHTML = address;
+            document.querySelector('.user-mail').innerHTML = email;
+            document.querySelector('.user-phone').innerHTML = phoneNo;       
+
+
+        };
+                
+    </script>
+</body>
+</html>
