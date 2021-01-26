@@ -55,7 +55,7 @@
                     <div class="results">
                         <a class="results-link" href="index.html"><i class="fas fa-arrow-left"></i><span style="font-weight:600;">RESULTS</span></a>
                         <div class="user-fist">
-                            <img src="images/image-victor.jpg" alt="">
+                            <img class="image-link" src="images/image-victor.jpg" alt="">
                             <div class="user-fist-txt">
                                 <h3 class="user-name">Mrs. Shalom Chioma</h3>
                                 <p class="user-address">9278 new road, kilcoole, waterford</p>
@@ -131,13 +131,15 @@
             let address = localStorage.getItem('ADDRESS');
             let email =  localStorage.getItem('EMAIL');
             let phoneNo = localStorage.getItem('CELL');
+            let picture = localStorage.getItem("IMAGE");
 
             console.log(name, address, email, phoneNo);
 
             document.querySelector('.user-name').innerHTML= name;
             document.querySelector('.user-address').innerHTML = address;
             document.querySelector('.user-mail').innerHTML = email;
-            document.querySelector('.user-phone').innerHTML = phoneNo;       
+            document.querySelector('.user-phone').innerHTML = phoneNo;
+            document.querySelector('.image-link').setAttribute("src", picture);    
 
 
         };

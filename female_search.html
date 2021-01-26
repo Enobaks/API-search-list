@@ -101,7 +101,6 @@
 
                 </div>
 
-
             </div>
         </div>
 
@@ -164,7 +163,6 @@
         async function getRandomUser() {
             const res = await fetch('https://randomuser.me/api/?gender=female');
             const data = await res.json();
-            MajorData.push(data.results[0])
             const user = data.results[0];
             const newUser = {
                 name: `${user.name.first} ${user.name.last}`,
@@ -189,32 +187,25 @@
         // Update DOM
         function updateDOM(providedData = data) {
             // Clear main div
-
-            // console.log(providedData);
             let output = "";
             let resultWrap = document.querySelector('.result-wrap');
-
             let i = 0;
-
             providedData.forEach(item => {
+            MajorData.push(item)
                 output += `<div class="fist">
-                        <img src="${item.picture}" alt="">
+                        <img src="${item.picture}" class="picture" alt="">
                         <div class="fist-txt">
                             <h3 class="name">${item.name}</h3>
                             <p class="address">${item.address}</p>
                             <div class="contact">
-                                <i class="far fa-envelope lane"></i><span class="mail">${item.email}</span> 
-                                <i class="fas fa-phone-alt lane"></i><span class="phone">${item.cell}</span>
-                                <a type="button" target="_blank" href="user_list.html" class="arrow" onclick="handleSubmit()"><i class="fas fa-arrow-right"></i></a>
-                               
+                                <i class="far fa-envelope lane"></i><span class="mail">${item.email} </span> 
+                                <i class="fas fa-phone-alt  lane"></i><span class="phone"> ${item.cell}</span>
+                                <button  onclick=handleClick(${item.cell}) class="arrow" ><i class="fas fa-arrow-right"></i></button>
                             </div>
                         </div>
                     </div>`;
-
                 results.innerHTML = output;
-
             });
-
         }
 
         function insertAfter(element, string) {
@@ -225,21 +216,26 @@
 
         insertAfter(results, string);
 
-        const display = (a)=>{
-            console.log(a)
+        // function handleSubmit() {
+        //     let fullName = document.querySelector('.name').innerHTML;
+        //     let homeAddress = document.querySelector('.address').innerHTML;
+        //     let mail = document.querySelector('.mail').textContent;
+        //     let phoneNumber = document.querySelector('.phone').textContent;
+        //     let picture = document.querySelector('.picture');
+        //     picture.src = `${item.picture}`;
+        //     console.log(fullName, homeAddress, mail, phoneNumber, picture.src)
+        //     localStorage.setItem("NAME", fullName);
+        //     localStorage.setItem("ADDRESS", homeAddress);
+        //     localStorage.setItem("EMAIL", mail);
+        //     localStorage.setItem("CELL", phoneNumber);
+        // };
+            let user
+        var handleClick =(name)=>{
+            for(value of MajorData){
+                user = value.cell === name ? value : 'value'
+                console.log(user) 
+            }
         }
-
-        function handleSubmit() {
-            let fullName = document.querySelector('.name').innerHTML;
-            let homeAddress = document.querySelector('.address').innerHTML;
-            let mail = document.querySelector('.mail').textContent;
-            let phoneNumber = document.querySelector('.phone').textContent;
-            console.log(fullName, homeAddress, mail, phoneNumber)
-            localStorage.setItem("NAME", fullName);
-            localStorage.setItem("ADDRESS", homeAddress);
-            localStorage.setItem("EMAIL", mail);
-            localStorage.setItem("CELL", phoneNumber);
-        };
     </script>
 </body>
 

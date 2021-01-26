@@ -98,6 +98,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="details" style="width: 100%; height: 30vh; background-color: rgb(170, 203, 231); display: none;"></div>
 
                 </div>
 
@@ -196,7 +197,7 @@
 
             let i = 0;
 
-            providedData.forEach(item => {
+            providedData.forEach((item, index) => {
                 output += `<div class="fist">
                         <img src="${item.picture}" alt="">
                         <div class="fist-txt">
@@ -205,7 +206,7 @@
                             <div class="contact">
                                 <i class="far fa-envelope lane"></i><span class="mail">${item.email}</span> 
                                 <i class="fas fa-phone-alt lane"></i><span class="phone">${item.cell}</span>
-                                <a type="button" target="_blank" href="user_list.html" class="arrow" onclick="handleSubmit()"><i class="fas fa-arrow-right"></i></a>
+                                <a type="button" target="_blank" href="user_list.html" class="arrow" onclick="handleSubmit(data[${index}])"><i class="fas fa-arrow-right"></i></a>
                                
                             </div>
                         </div>
@@ -225,16 +226,19 @@
 
         insertAfter(results, string);
 
-        function handleSubmit() {
-            let fullName = document.querySelector('.name').innerHTML;
-            let homeAddress = document.querySelector('.address').innerHTML;
-            let mail = document.querySelector('.mail').textContent;
-            let phoneNumber = document.querySelector('.phone').textContent;
-            console.log(fullName, homeAddress, mail, phoneNumber)
-            localStorage.setItem("NAME", fullName);
-            localStorage.setItem("ADDRESS", homeAddress);
-            localStorage.setItem("EMAIL", mail);
-            localStorage.setItem("CELL", phoneNumber);
+        function handleSubmit(e) {
+            
+            let result = document.querySelector('.results');
+            let details = document.querySelector('.details');
+
+            // result.style.display = 'none';
+            // details.style.display = 'block';
+
+            localStorage.setItem("NAME", e.name);
+            localStorage.setItem("ADDRESS", e.address);
+            localStorage.setItem("EMAIL", e.email);
+            localStorage.setItem("CELL", e.cell);
+            localStorage.setItem("IMAGE", e.picture)
         };
     </script>
 </body>
